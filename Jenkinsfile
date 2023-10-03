@@ -8,15 +8,16 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
+    stage('Clone Repo') {
       steps {
         git branch: 'main', url: 'https://github.com/IlkayKaysanak/DevOps-UserM.git'
       }
     }
     stage('NPM Install') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
+            
         }
 
     stage('Snyk Scan') {
@@ -24,25 +25,21 @@ pipeline {
         snykSecurity organisation: 'ilkaykaysanak', projectName: 'DevOps-UserM', severity: 'medium', snykInstallation: 'Snyk', snykTokenId: 'snyk-token', targetFile: 'package.json'
         }
     }
-    stage('Build') {
+    stage('Build Image') {
       steps {
-        sh 'docker build -t ilkai/dp-alpine:latest .'
+         script {
+                    withDockerRegistry(credentialsId: 'ilkai-dockerhub') {
+                        bat "docker build -t ilkai/devopsuserm:${BUILD_ID} -f Dockerfile ."
+                        bat "docker push ilkai/devopsuserm:${BUILD_ID}"
+                    }
       }
     }
-    stage('Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
     }
-    stage('Push') {
-      steps {
-        sh 'docker push ilkai/dp-alpine:latest'
-      }
+     stage('Trivy Scan'){
+      steps{
+            bat "docker run aquasec/trivy image ilkai/devopsuserm:latest"
+            }
     }
   }
-  post {
-    always {
-      sh 'docker logout'
-    }
-  }
+  
 }
