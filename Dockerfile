@@ -1,3 +1,7 @@
-FROM node:16-alpine
-
-RUN apk add -U git curl
+FROM node
+WORKDIR .
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]
