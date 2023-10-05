@@ -15,7 +15,7 @@ pipeline {
     }
     stage('NPM Install') {
             steps {
-                bat 'npm install'
+                sh 'npm install'
             }
             
         }
@@ -29,17 +29,32 @@ pipeline {
       steps {
          script {
                     withDockerRegistry(credentialsId: 'ilkai-dockerhub') {
-                        bat "docker build -t ilkai/devopsuserm:${BUILD_ID} -f Dockerfile ."
-                        bat "docker push ilkai/devopsuserm:${BUILD_ID}"
+                        sh "docker build -t ilkai/devopsuserm:latest -f Dockerfile ."
+                        sh "docker push ilkai/devopsuserm:latest"
                     }
       }
     }
     }
-     stage('Trivy Scan'){
+ stage('Trivy Scan'){
       steps{
-            bat "docker run aquasec/trivy image ilkai/devopsuserm:latest"
+            sh "docker run aquasec/trivy image ilkai/devopsuserm:latest"
             }
     }
+    stage('Deploy to test cluster') {
+            steps {
+                
+                script {
+                     sh "gcloud auth activate-service-account --key-file=/var/lib/jenkins/jenkins-sa.json"
+                     sh "gcloud container clusters get-credentials ilkaicluster --zone us-central1 --project cogent-bison-401008"
+                     sh 'kubectl apply -f dev-deployment.yaml'
+                    
+                   
+                }
+            }
+        }
   }
   
 }
+
+
+
