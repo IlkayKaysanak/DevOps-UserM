@@ -25,10 +25,7 @@ spec:
           - name: MYSQL_USER
             value: root
           - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysql-secret
-                key: MYSQL_ROOT_PASSWORD
+            value: YXBpVXNlckEyMzEh
 ---
 apiVersion: v1
 kind: Service
