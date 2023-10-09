@@ -4,7 +4,7 @@ metadata:
   name: mysql-secret
 type: Opaque
 data:
-  password: Admin123!
+  password: YXBpVXNlckEyMzEh
 ---
 apiVersion: apps/v1
 kind: Deployment
