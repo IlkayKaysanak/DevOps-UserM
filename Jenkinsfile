@@ -30,7 +30,9 @@ pipeline {
          script {
                     withDockerRegistry(credentialsId: 'ilkai-dockerhub') {
                         sh "docker build -t ilkai/devopsuserm:latest -f Dockerfile ."
+                        sh "docker build -t ilkai/mysql-database:latest -f Dockerfile2 ."
                         sh "docker push ilkai/devopsuserm:latest"
+                        sh "docker push ilkai/mysql-database:latest"
                     }
       }
     }
@@ -46,6 +48,7 @@ pipeline {
                 script {
                      sh "gcloud auth activate-service-account --key-file=/var/lib/jenkins/jenkins-sa.json"
                      sh "gcloud container clusters get-credentials ilkaicluster --zone us-central1 --project cogent-bison-401008"
+                     sh 'kubectl apply -f mysql-deployment.yaml'
                      sh 'kubectl apply -f dev-deployment.yaml'
                     
                    
