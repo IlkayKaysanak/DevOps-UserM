@@ -17,13 +17,13 @@ spec:
           image: ilkai/mysql-database:latest # MySQL Docker görüntüsü
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: 1234 # MySQL root şifresini buraya ekleyin
+              value: "1234" # MySQL root şifresini buraya ekleyin
             - name: MYSQL_DATABASE
               value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
             - name: MYSQL_USER
               value: ilkay # Uygulamanızın kullanacağı MySQL kullanıcı adını buraya ekleyin
             - name: MYSQL_PASSWORD
-              value: 1234 # Uygulamanızın kullanacağı MySQL şifresini buraya ekleyin
+              value: "1234" # Uygulamanızın kullanacağı MySQL şifresini buraya ekleyin
 ---
 apiVersion: v1
 kind: Service
