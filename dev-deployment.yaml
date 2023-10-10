@@ -1,41 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
+  name: express-app
 spec:
-  replicas: 2 
+  replicas: 2 # İstediğiniz pod sayısını ayarlayın
   selector:
     matchLabels:
-      app: app
+      app: express-app
   template:
     metadata:
       labels:
-        app: app
+        app: express-app
     spec:
       containers:
-      - name: app
-        image: ilkai/devopsuserm:latest 
-        ports:
-        - containerPort: 3000
-        env:
-          - name: MYSQL_HOST
-            value: test
-          - name: MYSQL_PORT
-            value: '3306'
-          - name: MYSQL_USER
-            value: root
-          - name: MYSQL_ROOT_PASSWORD
-            value: YXBpVXNlckEyMzEh
+        - name: express-app
+          image: ilkai/devopsuserm:latest # Docker görüntünüzün adını ve sürümünü buraya ekleyin
+          ports:
+            - containerPort: 4000 # Uygulamanız hangi portu dinliyorsa onu belirtin
+          env:
+            - name: PORT
+              value: "4000" # Uygulamanızın hangi portu dinlemesi gerektiğini belirtin
+            - name: MYSQL_HOST
+              value: mysql-service.default.svc.cluster.local # MySQL sunucunuzun host adını buraya ekleyin
+            - name: MYSQL_USER
+              value: root # MySQL kullanıcı adınızı buraya ekleyin
+            - name: MYSQL_PASSWORD
+              value: YXBpVXNlckEyMzEh # MySQL şifrenizi buraya ekleyin
+            - name: MYSQL_DATABASE
+              value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-service
+  name: express-app-service
 spec:
   selector:
-    app: app
+    app: express-app
   ports:
-    - port: 80
-      targetPort: 3000
-  type: LoadBalancer 
-
+    - protocol: TCP
+      port: 80
+      targetPort: 4000 # Uygulamanızın çalıştığı portu belirtin
+  type: LoadBalancer # Servisi dış dünyaya açmak isterseniz LoadBalancer olarak ayarlayabilirsiniz

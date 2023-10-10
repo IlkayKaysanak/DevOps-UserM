@@ -14,20 +14,26 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: ilkai/mysql-database:latest
+          image: ilkai/mysql-database:latest # MySQL Docker görüntüsü
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: YXBpVXNlckEyMzEh
-          ports:
-            - containerPort: 3306
+              value: YXBpVXNlckEyMzEh # MySQL root şifresini buraya ekleyin
+            - name: MYSQL_DATABASE
+              value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
+            - name: MYSQL_USER
+              value: root # Uygulamanızın kullanacağı MySQL kullanıcı adını buraya ekleyin
+            - name: MYSQL_PASSWORD
+              value: YXBpVXNlckEyMzEh # Uygulamanızın kullanacağı MySQL şifresini buraya ekleyin
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: mysql-service
 spec:
   selector:
     app: mysql
   ports:
-    - port: 3306
+    - protocol: TCP
+      port: 3306
       targetPort: 3306
+  type: ClusterIP # İhtiyaca bağlı olarak değiştirilebilir
