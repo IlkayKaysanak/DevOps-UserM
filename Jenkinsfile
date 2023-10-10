@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+   agent any
 
   tools {nodejs "nodejs"}
 
@@ -13,9 +13,10 @@ pipeline {
         git branch: 'main', url: 'https://github.com/IlkayKaysanak/DevOps-UserM.git'
       }
     }
-    stage('NPM Install') {
+    stage('Install Dependencies') {
             steps {
                 sh 'npm install'
+                sh 'pip install selenium'
             }
             
         }
@@ -48,11 +49,24 @@ pipeline {
                 script {
                      sh "gcloud auth activate-service-account --key-file=/var/lib/jenkins/jenkins-sa.json"
                      sh "gcloud container clusters get-credentials ilkaicluster --zone us-central1 --project cogent-bison-401008"
-                     sh 'kubectl apply -f mysql-deployment.yaml'
+                    
                      sh 'kubectl apply -f dev-deployment.yaml'
+                     sh 'kubectl apply -f mysql-deployment.yaml'
                     
                    
                 }
+            }
+        }
+         stage('Wait for 1 minutes') {
+            steps {
+                
+                sleep(time: 60, unit: 'SECONDS')
+            }
+        }
+        stage('Run Selenium Test') {
+            steps {
+                
+                sh 'python3 test.py' 
             }
         }
   }

@@ -1,9 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
-# Web tarayıcısını başlat (örneğin Chrome)
-driver = webdriver.Chrome()
+# Başlıksız (headless) bir Chrome tarayıcısı başlat
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Tarayıcıyı başlıksız modda başlat
+
+driver = webdriver.Chrome(options=chrome_options)
 
 # Web sitesinin URL'sini açın
 driver.get("http://express-app-service.default.svc.cluster.local:4000")  # Web sitesinin URL'sini buraya ekleyin
