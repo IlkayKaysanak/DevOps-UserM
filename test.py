@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 driver = webdriver.Chrome()
 
 # Web sitesinin URL'sini açın
-driver.get("http://express-app-service.default.svc.cluster.local:3000")  # Web sitesinin URL'sini buraya ekleyin
+driver.get("http://express-app-service.default.svc.cluster.local:4000")  # Web sitesinin URL'sini buraya ekleyin
 
 # Kullanıcı adı, soyadı, e-posta ve parola bilgilerini doldurun
 name_input = driver.find_element(By.ID, "name")
