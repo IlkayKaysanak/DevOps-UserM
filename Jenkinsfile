@@ -32,8 +32,10 @@ pipeline {
                     withDockerRegistry(credentialsId: 'ilkai-dockerhub') {
                         sh "docker build -t ilkai/devopsuserm:latest -f Dockerfile ."
                         sh "docker build -t ilkai/mysql-database:latest -f Dockerfile2 ."
+                        sh "docker build -t ilkai/selenium-test:latest -f Dockerfile3 ."
                         sh "docker push ilkai/devopsuserm:latest"
                         sh "docker push ilkai/mysql-database:latest"
+                        sh "docker push ilkai/selenium-test:latest"
                     }
       }
     }
@@ -52,21 +54,21 @@ pipeline {
                     
                      sh 'kubectl apply -f dev-deployment.yaml'
                      sh 'kubectl apply -f mysql-deployment.yaml'
-                    
+                     
                    
                 }
             }
         }
          stage('Wait for 1 minutes') {
             steps {
-                
                 sleep(time: 60, unit: 'SECONDS')
+                
             }
         }
         stage('Run Selenium Test') {
             steps {
                 
-                sh 'python3 test.py' 
+                sh 'kubectl apply -f selenium-dep.yaml'
             }
         }
   }
