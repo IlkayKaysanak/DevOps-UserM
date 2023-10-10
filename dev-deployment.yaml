@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: express-app
 spec:
-  replicas: 2 # İstediğiniz pod sayısını ayarlayın
+  replicas: 1 # İstediğiniz pod sayısını ayarlayın
   selector:
     matchLabels:
       app: express-app
@@ -23,9 +23,9 @@ spec:
             - name: MYSQL_HOST
               value: mysql-service.default.svc.cluster.local # MySQL sunucunuzun host adını buraya ekleyin
             - name: MYSQL_USER
-              value: root # MySQL kullanıcı adınızı buraya ekleyin
+              value: ilkay # MySQL kullanıcı adınızı buraya ekleyin
             - name: MYSQL_PASSWORD
-              value: YXBpVXNlckEyMzEh # MySQL şifrenizi buraya ekleyin
+              value: 1234 # MySQL şifrenizi buraya ekleyin
             - name: MYSQL_DATABASE
               value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
 ---
