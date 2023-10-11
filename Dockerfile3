@@ -1,15 +1,7 @@
 FROM python:3.9
-
-# Install Selenium and ChromeDriver
 RUN pip install selenium
 RUN apt-get update
 RUN apt-get install -y chromium-driver
-
-# Set the working directory
 WORKDIR .
-
-# Copy your Selenium test scripts to the container
 COPY test.py .
-
-# Define the entry point to run the test script
 ENTRYPOINT ["python", "test.py"]

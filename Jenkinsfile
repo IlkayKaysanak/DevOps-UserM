@@ -68,7 +68,7 @@ pipeline {
         stage('Run Selenium Test') {
             steps {
                 
-                sh 'kubectl apply -f selenium-dep.yaml'
+                sh 'docker run ilkai/selenium-test:latest '
             }
         }
   }
