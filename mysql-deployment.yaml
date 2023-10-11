@@ -40,6 +40,6 @@ spec:
               value: "1234"
             - name: MYSQL_DATABASE
               value: "test"
-      volumeMounts:
-        - name: mysql-pv
-          mountPath: /var/lib/mysql
+          volumeMounts:
+            - name: mysql-pv
+              mountPath: /var/lib/mysql
