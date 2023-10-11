@@ -24,10 +24,6 @@ spec:
       labels:
         app: mysql
     spec:
-      volumes:
-        - name: mysql-pv
-          persistentVolumeClaim:
-            claimName: mysql-pv-claim
       containers:
         - name: mysql
           image: ilkai/mysql-database:latest
@@ -43,3 +39,18 @@ spec:
           volumeMounts:
             - name: mysql-pv
               mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-pv
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
