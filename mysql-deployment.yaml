@@ -1,7 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+  type: ClusterIP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: mysql
 spec:
   replicas: 1
   selector:
@@ -14,26 +26,13 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: ilkai/mysql-database:latest # MySQL Docker görüntüsü
+          image: ilkai/mysql-database:latest
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: "1234" # MySQL root şifresini buraya ekleyin
-            - name: MYSQL_DATABASE
-              value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
-            - name: MYSQL_USER
-              value: ilkay # Uygulamanızın kullanacağı MySQL kullanıcı adını buraya ekleyin
+              value: "1234"
+            - name: "ilkay"
+              value: "your_user"
             - name: MYSQL_PASSWORD
-              value: "1234" # Uygulamanızın kullanacağı MySQL şifresini buraya ekleyin
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-service
-spec:
-  selector:
-    app: mysql
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
-  type: ClusterIP # İhtiyaca bağlı olarak değiştirilebilir
+              value: "1234"
+            - name: MYSQL_DATABASE
+              value: "test"

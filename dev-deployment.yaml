@@ -18,16 +18,14 @@ spec:
           ports:
             - containerPort: 4000 # Uygulamanız hangi portu dinliyorsa onu belirtin
           env:
-            - name: PORT
-              value: "4000" # Uygulamanızın hangi portu dinlemesi gerektiğini belirtin
             - name: MYSQL_HOST
-              value: mysql-service.default.svc.cluster.local # MySQL sunucunuzun host adını buraya ekleyin
+              value: "mysql-service.default.svc.cluster.local" # MySQL sunucunuzun host adını buraya ekleyin
             - name: MYSQL_USER
-              value: ilkay # MySQL kullanıcı adınızı buraya ekleyin
+              value: "ilkay" # MySQL kullanıcı adınızı buraya ekleyin
             - name: MYSQL_PASSWORD
               value: "1234" # MySQL şifrenizi buraya ekleyin
             - name: MYSQL_DATABASE
-              value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
+              value: "test" # Kullanmak istediğiniz veritabanının adını buraya ekleyin
 ---
 apiVersion: v1
 kind: Service
@@ -39,5 +37,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 4000 # Uygulamanızın çalıştığı portu belirtin
-  type: LoadBalancer # Servisi dış dünyaya açmak isterseniz LoadBalancer olarak ayarlayabilirsiniz
+      targetPort: 4000
+  type: LoadBalancer 

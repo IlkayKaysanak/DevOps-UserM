@@ -9,7 +9,7 @@ options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 
 # Web sitesinin URL'sini açın
-driver.get("http://app-service.default.svc.cluster.local:4000")  # Web sitesinin URL'sini buraya ekleyin
+driver.get("http://34.29.67.56")  # Web sitesinin URL'sini buraya ekleyin
 
 # Kullanıcı adı, soyadı, e-posta ve parola bilgilerini doldurun
 name_input = driver.find_element(By.ID, "name")
