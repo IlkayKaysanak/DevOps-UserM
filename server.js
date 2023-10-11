@@ -23,10 +23,10 @@ const mysql = require('mysql2');
 
 // create the connection to database
 const connection = mysql.createConnection({
-  host: 'mysql-service.default.svc.cluster.local',
+  host: 'localhost',
   user: 'ilkay',
   database: 'test',
-  password: '12345'
+  password: '1234'
 });
 
 

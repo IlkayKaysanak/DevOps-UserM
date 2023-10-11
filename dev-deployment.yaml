@@ -21,11 +21,11 @@ spec:
             - name: PORT
               value: "4000" # Uygulamanızın hangi portu dinlemesi gerektiğini belirtin
             - name: MYSQL_HOST
-              value: mysql-service.default.svc.cluster.local # MySQL sunucunuzun host adını buraya ekleyin
+              value: localhost # MySQL sunucunuzun host adını buraya ekleyin
             - name: MYSQL_USER
               value: ilkay # MySQL kullanıcı adınızı buraya ekleyin
             - name: MYSQL_PASSWORD
-              value: "12345" # MySQL şifrenizi buraya ekleyin
+              value: "1234" # MySQL şifrenizi buraya ekleyin
             - name: MYSQL_DATABASE
               value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
 ---
