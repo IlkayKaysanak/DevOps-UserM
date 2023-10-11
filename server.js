@@ -26,7 +26,7 @@ const connection = mysql.createConnection({
   host: 'mysql-service.default.svc.cluster.local',
   user: 'ilkay',
   database: 'test',
-  password: '1234'
+  password: '12345'
 });
 
 

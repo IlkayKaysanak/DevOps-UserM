@@ -25,7 +25,7 @@ spec:
             - name: MYSQL_USER
               value: ilkay # MySQL kullanıcı adınızı buraya ekleyin
             - name: MYSQL_PASSWORD
-              value: "1234" # MySQL şifrenizi buraya ekleyin
+              value: "12345" # MySQL şifrenizi buraya ekleyin
             - name: MYSQL_DATABASE
               value: test # Kullanmak istediğiniz veritabanının adını buraya ekleyin
 ---
