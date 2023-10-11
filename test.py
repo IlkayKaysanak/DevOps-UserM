@@ -4,13 +4,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 # Başlıksız (headless) bir Chrome tarayıcısı başlat
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Tarayıcıyı başlıksız modda başlat
-
-driver = webdriver.Chrome(options=chrome_options)
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+driver = webdriver.Chrome(options=options)
 
 # Web sitesinin URL'sini açın
-driver.get("http://express-app-service.default.svc.cluster.local:4000")  # Web sitesinin URL'sini buraya ekleyin
+driver.get("http://app-service.default.svc.cluster.local:4000")  # Web sitesinin URL'sini buraya ekleyin
 
 # Kullanıcı adı, soyadı, e-posta ve parola bilgilerini doldurun
 name_input = driver.find_element(By.ID, "name")

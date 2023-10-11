@@ -17,6 +17,8 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'pip install selenium'
+                sh 'apt-get update'
+                sh 'apt-get install -y chromium-driver'
             }
             
         }
@@ -32,10 +34,8 @@ pipeline {
                     withDockerRegistry(credentialsId: 'ilkai-dockerhub') {
                         sh "docker build -t ilkai/devopsuserm:latest -f Dockerfile ."
                         sh "docker build -t ilkai/mysql-database:latest -f Dockerfile2 ."
-                        sh "docker build -t ilkai/selenium-test:latest -f Dockerfile3 ."
                         sh "docker push ilkai/devopsuserm:latest"
                         sh "docker push ilkai/mysql-database:latest"
-                        sh "docker push ilkai/selenium-test:latest"
                     }
       }
     }
@@ -68,7 +68,7 @@ pipeline {
         stage('Run Selenium Test') {
             steps {
                 
-                sh 'docker run ilkai/selenium-test:latest '
+                sh 'python3 test.py '
             }
         }
   }
