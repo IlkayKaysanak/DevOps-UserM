@@ -21,7 +21,7 @@ spec:
             - name: PORT
               value: "4000" # Uygulamanızın hangi portu dinlemesi gerektiğini belirtin
             - name: MYSQL_HOST
-              value: localhost # MySQL sunucunuzun host adını buraya ekleyin
+              value: mysql-service.default.svc.cluster.local # MySQL sunucunuzun host adını buraya ekleyin
             - name: MYSQL_USER
               value: ilkay # MySQL kullanıcı adınızı buraya ekleyin
             - name: MYSQL_PASSWORD
