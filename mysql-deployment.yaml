@@ -30,8 +30,8 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "1234"
-            - name: "ilkay"
-              value: "your_user"
+            - name: MYSQL_USER
+              value: "ilkay"
             - name: MYSQL_PASSWORD
               value: "1234"
             - name: MYSQL_DATABASE
