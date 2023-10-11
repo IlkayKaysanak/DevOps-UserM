@@ -30,12 +30,6 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "1234"
-            - name: MYSQL_USER
-              value: "ilkay"
-            - name: MYSQL_PASSWORD
-              value: "1234"
-            - name: MYSQL_DATABASE
-              value: "test"
           volumeMounts:
             - name: mysql-pv
               mountPath: /var/lib/mysql
