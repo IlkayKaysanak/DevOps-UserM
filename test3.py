@@ -5,21 +5,10 @@ from selenium.webdriver.chrome.options import Options
 
 # Başlıksız (headless) bir Chrome tarayıcısı başlat
 options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+driver = webdriver.Chrome(options=options)
 
-options.add_argument('–ignore-ssl-errors=yes')
-
-options.add_argument('–ignore-certificate-errors')
-
-
-driver = webdriver.Remote(
-
-command_executor='http://localhost:4444/wd/hub',
-
-options=options
-
-)
-
-
+# Web sitesinin URL'sini açın
 driver.get("http://35.193.218.165")  # Web sitesinin URL'sini buraya ekleyin
 
 # Kullanıcı adı, soyadı, e-posta ve parola bilgilerini doldurun
@@ -36,7 +25,6 @@ password_input.send_keys("password")
 # "Add User" düğmesine tıklayın
 add_user_button = driver.find_element(By.ID, "submit")
 add_user_button.click()
-
 
 # Kullanıcı listesini alın ve kontrol edin
 user_list = driver.find_element(By.ID, "userList")
