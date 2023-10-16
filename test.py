@@ -20,7 +20,7 @@ options=options
 )
 
 
-driver.get("http://35.193.218.165")  # Web sitesinin URL'sini buraya ekleyin
+driver.get("http://34.30.4.137")  # Web sitesinin URL'sini buraya ekleyin
 
 # Kullanıcı adı, soyadı, e-posta ve parola bilgilerini doldurun
 name_input = driver.find_element(By.ID, "name")

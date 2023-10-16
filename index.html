@@ -16,7 +16,7 @@
                 
                     </div>
                     <div class="card-body">
-                        <form id="userForm" action="http://35.193.218.165/:80/add" method="post">
+                        <form id="userForm" action="http://34.30.4.137/:80/add" method="post">
                             <!-- Form fields go here, as in the previous example -->
                             <div class="form-group">
                                 <label for="name">Name:</label>
@@ -70,7 +70,7 @@
           async function fetchUserList() {
             try {
                 console.log("Fetching all users for reloading")
-                const response = await fetch('http://35.193.218.165:80/all');
+                const response = await fetch('http://34.30.4.137:80/all');
                 const users = await response.json();
                 console.log(users)
 
@@ -95,7 +95,7 @@
             });
 
             // Construct a URL with query parameters
-            const url = new URL('http://35.193.218.165/add');
+            const url = new URL('http://34.30.4.137/add');
             url.search = new URLSearchParams(userData).toString();
 
             // Send a POST request with query parameters
