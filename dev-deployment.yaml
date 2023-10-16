@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: express-app
 spec:
-  replicas: 1 # İstediğiniz pod sayısını ayarlayın
+  replicas: 1 
   selector:
     matchLabels:
       app: express-app
@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: express-app
-          image: ilkai/devopsuserm:latest # Docker görüntünüzün adını ve sürümünü buraya ekleyin
+          image: ilkai/devopsuserm:latest 
           ports:
-            - containerPort: 4000 # Uygulamanız hangi portu dinliyorsa onu belirtin
+            - containerPort: 4000 
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "1234" 
@@ -31,5 +31,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 4000 # Uygulamanızın çalıştığı portu belirtin
+      targetPort: 4000 
   type: LoadBalancer 
