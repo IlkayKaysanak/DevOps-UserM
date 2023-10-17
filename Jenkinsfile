@@ -61,7 +61,14 @@ pipeline {
                 }
             }
         }
-         
+        stage('Waiting') {
+            steps {
+                
+                script {
+                    sleep(time: 150, unit: 'SECONDS')
+                }
+            }
+        }
         stage('Run Selenium Test') {
             steps {
                 
@@ -99,6 +106,15 @@ pipeline {
                 sh "gcloud auth activate-service-account --key-file=/var/lib/jenkins/jenkins-sa.json"
                 sh "gcloud container clusters get-credentials ilkaicluster --zone us-central1-c --project cogent-bison-401008"
                 sh 'kubectl apply -f kasten-backup.yaml'
+            }
+        }
+        stage('prometheus and graphana setup') {
+            steps {
+                
+                sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-chart"
+                sh "kubectl create namespace prometheus"
+                sh 'helm install stable prometheus-community/kube-prometheus-stack -n prometheus'
+                //Burdan sonra manuel load balancer yapıp login olma işlemi var
             }
         }
   }
